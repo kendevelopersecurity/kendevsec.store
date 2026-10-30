@@ -1,5 +1,119 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KENDEVSEC Admin</title><link rel="stylesheet" href="assets/style.css"></head><body class="admin-body">
-<div id="loginView" class="login-wrap"><a class="brand" href="index.html"><span class="brand-mark">K</span> KENDEVSEC</a><div class="login-card"><span class="eyebrow">SECURE ADMIN ACCESS</span><h1>Welcome <em>back.</em></h1><p>Masuk untuk mengelola website KENDEVSEC.</p><form id="loginForm"><label>Email<input id="email" type="email" autocomplete="username" required></label><label>Password<input id="password" type="password" autocomplete="current-password" required></label><button class="button primary full" type="submit">Masuk ke dashboard ↗</button><p id="loginError" class="error"></p></form><a class="back-link" href="index.html">← Kembali ke website</a></div></div>
-<div id="adminView" class="admin-shell hidden"><aside class="sidebar"><a class="brand" href="index.html"><span class="brand-mark">K</span> KENDEVSEC</a><span class="side-label">WORKSPACE</span><button class="side-link active" data-page="overview">▦ Overview</button><button class="side-link" data-page="services">◇ Layanan</button><button class="side-link" data-page="categories">▥ Kategori</button><button class="side-link" data-page="articles">▤ Artikel</button><button class="side-link" data-page="faqs">? FAQ</button><button class="side-link" data-page="testimonials">☆ Testimoni</button><button class="side-link" data-page="coupons">％ Kode promo</button><button class="side-link" data-page="orders">↗ Pesanan</button><button class="side-link" data-page="messages">✉ Pesan masuk</button><button class="side-link" data-page="sections">▧ Bagian halaman</button><button class="side-link" data-page="visual">✧ Visual Studio</button><button class="side-link" data-page="catalog">▣ Katalog layanan</button><button class="side-link" data-page="settings">⚙ Pengaturan & SEO</button><button class="side-link" data-page="auditLogs">◷ Log aktivitas</button><div class="sidebar-bottom"><span id="adminEmail"></span><button id="logoutBtn" class="side-link">↪ Keluar</button></div></aside>
-<main class="admin-main"><header class="admin-top"><div><span class="eyebrow">KENDEVSEC / CONTROL CENTER</span><h1 id="pageTitle">Overview</h1></div><a class="button light" href="index.html" target="_blank">Lihat website ↗</a></header><div id="adminContent"></div></main></div>
-<div id="toast" class="toast"></div><script type="module" src="assets/admin.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Kenseonn IT Service</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body">
+  <div class="bg-grid"></div>
+  <main class="admin-wrap">
+    <section id="loginView" class="auth-card">
+      <div class="brand"><span class="brand-mark brand-emblem"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3 56 17v30L32 61 8 47V17Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M20 43V21h6v9l12-9h8L31 33l15 10h-9l-11-8v8Z" fill="currentColor"/><circle cx="48" cy="16" r="4" fill="#79f2a0"/></svg></span><span>KENSEONN <small>COMMAND CENTER</small></span></div>
+      <h1>Admin Login</h1>
+      <p>Kelola profil, layanan, paket dan order dari Firebase.</p>
+      <form id="loginForm">
+        <input id="loginEmail" type="email" required placeholder="Email admin">
+        <input id="loginPassword" type="password" required placeholder="Password">
+        <button class="btn primary full">Masuk</button>
+        <div id="loginStatus" class="form-status"></div>
+      </form>
+      <a href="index.html">← Kembali ke website</a>
+    </section>
+
+    <section id="dashboard" class="dashboard hidden">
+      <header class="admin-header"><div><span class="kicker">CONTROL PANEL</span><h1>Kenseonn Admin</h1></div><button id="logoutBtn" class="btn ghost">Logout</button></header>
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-pane="overviewPane">⌂ Overview</button><button class="admin-tab" data-pane="sitePane">Website</button><button class="admin-tab" data-pane="servicesPane">Layanan</button><button class="admin-tab" data-pane="packagesPane">Boosting & Harga</button><button class="admin-tab" data-pane="ordersPane">Pesanan</button><button class="admin-tab" data-pane="customersPane">Pelanggan</button><button class="admin-tab" data-pane="designPane">Design Lab</button><button class="admin-tab" data-pane="analyticsPane">Analytics</button><button class="admin-tab" data-pane="systemPane">System Tools</button>
+      </div>
+
+      <div id="overviewPane" class="admin-pane">
+        <div class="admin-stats"><div><b id="statOrders">0</b><span>Total orders</span></div><div><b id="statServices">0</b><span>Layanan</span></div><div><b id="statPackages">0</b><span>Paket</span></div></div>
+        <div class="admin-card"><div class="section-head"><div><span class="kicker">COMMAND CENTER</span><h2>Operational overview</h2></div><span class="live-pill">● FIREBASE CONNECTED</span></div><p>Kelola katalog, pesanan manual, desain, dan operasional dari satu tempat.</p><div class="quick-grid"><button class="quick-action" data-jump="ordersPane">Buka pesanan</button><button class="quick-action" data-jump="packagesPane">Kelola harga</button><button class="quick-action" data-jump="designPane">Atur tampilan</button><button class="quick-action" data-jump="analyticsPane">Lihat analytics</button></div><div class="admin-stats extra-stats"><div><b id="statNew">0</b><span>Pesanan baru</span></div><div><b id="statDone">0</b><span>Selesai</span></div><div><b id="statRevenue">Rp 0</b><span>Nilai order berstatus paid/done*</span></div></div><small>*Nilai dihitung dari harga paket yang dicantumkan dalam detail pesanan bila tersedia; bukan laporan pembayaran terverifikasi.</small></div>
+        <div class="admin-card"><h2>Operational modules yang aktif</h2><div class="capability-grid" id="capabilityGrid"></div></div>
+      </div>
+
+      <div id="sitePane" class="admin-pane hidden">
+        <div class="admin-card"><h2>Website & Profil</h2><form id="siteForm" class="form-grid">
+          <label>Nama brand<input name="brandName"></label><label>Judul hero<input name="heroTitle"></label>
+          <label class="wide">Deskripsi hero<textarea name="heroText"></textarea></label><label>Nama profil<input name="aboutName"></label>
+          <label class="wide">Bio<textarea name="aboutBio"></textarea></label><label>Email<input name="email"></label>
+          <label>Instagram username<input name="instagram"></label><label>WhatsApp number<input name="whatsapp"></label>
+          <label>Experience text<input name="experience"></label>
+          <div class="wide maintenance-admin"><h3>Registrasi Pelanggan</h3><label class="toggle-line"><input type="checkbox" name="registrationEnabled" checked> Izinkan pelanggan membuat akun baru</label><small>Jika dimatikan, formulir daftar disembunyikan. Akun yang sudah ada tetap dapat login.</small></div>
+          <div class="wide maintenance-admin"><h3>Direct Payment Settings</h3><div class="form-grid"><label>Metode pembayaran<input name="paymentMethod" placeholder="Transfer bank / QRIS"></label><label>Nama penerima<input name="paymentRecipient" placeholder="Nama pemilik rekening"></label><label class="wide">Nomor rekening / detail QRIS<input name="paymentAccount" placeholder="Nomor rekening atau keterangan QRIS"></label><label class="wide">Instruksi pembayaran<textarea name="paymentInstructions" placeholder="Admin menetapkan nominal sebelum pelanggan transfer."></textarea></label></div><small>Ini hanya instruksi pembayaran manual. Tidak ada payment gateway atau verifikasi transfer otomatis.</small></div>
+          <div class="wide maintenance-admin">
+            <h3>Maintenance Mode</h3>
+            <label class="toggle-line"><input type="checkbox" name="maintenanceEnabled" id="maintenanceEnabled"> Aktifkan Maintenance Mode</label>
+            <div class="form-grid">
+              <label>Judul maintenance<input name="maintenanceTitle" id="maintenanceTitleInput" placeholder="Website sedang maintenance"></label>
+              <label>Pesan maintenance<input name="maintenanceMessage" id="maintenanceMessageInput" placeholder="Silakan kembali beberapa saat lagi."></label>
+              <label>Countdown sampai<input type="datetime-local" name="maintenanceUntil" id="maintenanceUntilInput"></label>
+              <label>Status text<input name="maintenanceStatus" id="maintenanceStatusInput" placeholder="MAINTENANCE"></label>
+            </div>
+          </div>
+          <div class="wide"><button class="btn primary">Simpan Website</button><span id="siteStatus" class="form-status"></span></div>
+        </form></div>
+      </div>
+
+      <div id="servicesPane" class="admin-pane hidden">
+        <div class="admin-card"><h2>Tambah / Edit Layanan</h2><form id="serviceForm" class="form-grid">
+          <input type="hidden" name="id"><label>Nama layanan<input required name="name"></label><label>Icon<input name="icon" placeholder="⚡"></label>
+          <label class="wide">Deskripsi<textarea required name="description"></textarea></label><label>Status<select name="active"><option value="true">Aktif</option><option value="false">Nonaktif</option></select></label>
+          <div><button class="btn primary">Simpan</button><button type="button" id="serviceCancel" class="btn ghost">Reset</button></div>
+        </form></div><div id="servicesAdminList" class="admin-list"></div>
+      </div>
+
+      <div id="packagesPane" class="admin-pane hidden">
+        <div class="admin-card"><h2>Tambah / Edit Paket</h2><form id="packageForm" class="form-grid">
+          <input type="hidden" name="id"><label>Platform<select name="platform"><option value="instagram">Instagram</option><option value="tiktok">TikTok</option><option value="facebook">Facebook</option><option value="youtube">YouTube</option><option value="telegram">Telegram</option><option value="x">X</option><option value="threads">Threads</option><option value="whatsapp">WhatsApp</option><option value="linkedin">LinkedIn</option><option value="spotify">Spotify</option><option value="twitch">Twitch</option><option value="snapchat">Snapchat</option><option value="pinterest">Pinterest</option><option value="reddit">Reddit</option><option value="discord">Discord</option><option value="soundcloud">SoundCloud</option><option value="kick">Kick</option><option value="medium">Medium</option><option value="quora">Quora</option></select></label>
+          <label>Jenis layanan<select name="type"><option>Followers</option><option>Views</option><option>Likes</option><option>Comments</option><option>Shares</option><option>Subscribers</option><option>Members</option></select></label><label>Qty<input required name="qty" placeholder="1K"></label><label>Harga (rupiah)<input required type="number" name="price"></label><label>Garansi<input required name="guarantee" placeholder="7 hari"></label>
+          <div><button class="btn primary">Simpan</button><button type="button" id="packageCancel" class="btn ghost">Reset</button></div>
+        </form></div><div id="packagesAdminList" class="admin-list"></div>
+      </div>
+
+      <div id="ordersPane" class="admin-pane hidden">
+        <div class="admin-card"><div class="list-head"><h2>Order Masuk</h2><div class="action-row"><button id="exportOrders" class="btn ghost">Export CSV</button><button id="refreshOrders" class="btn ghost">Refresh</button></div></div><div class="filter-row"><input id="orderSearch" placeholder="Cari nama, nomor, layanan, kode order..."><label class="toggle-line"><input type="checkbox" id="showArchivedOrders"> Tampilkan arsip</label><select id="orderFilter"><option value="all">Semua status</option><option>new</option><option>contacted</option><option>paid</option><option>processing</option><option>done</option><option>cancelled</option></select></div><div id="ordersAdminList" class="orders-list"></div></div>
+      </div>
+
+
+      <div id="customersPane" class="admin-pane hidden">
+        <div class="admin-card"><div class="list-head"><div><span class="kicker">CUSTOMER DIRECTORY</span><h2>Data Pelanggan</h2></div><span class="live-pill"><b id="statCustomers">0</b> akun</span></div><input id="customerSearch" placeholder="Cari nama, email, atau UID pelanggan"><div id="customersAdminList" class="admin-list"></div><p class="muted-note">Data hanya untuk kebutuhan layanan. Jangan membagikan UID atau email pelanggan kepada pihak lain.</p></div>
+      </div>
+
+      <div id="designPane" class="admin-pane hidden">
+        <div class="admin-card"><span class="kicker">VISUAL ENGINE</span><h2>Design Lab</h2><p>Atur tema, efek, kecepatan, intensitas, dan identitas visual. Perubahan disimpan pada dokumen siteConfig/main yang sudah digunakan.</p>
+          <form id="designForm" class="form-grid">
+            <label>Preset tema<select name="theme"><option value="matrix">Matrix Command</option><option value="aurora">Aurora Ice</option><option value="violet">Violet Pulse</option><option value="ember">Cyber Ember</option><option value="mono">Stealth Mono</option></select></label>
+            <label>Efek latar<select name="effect"><option value="matrix">Matrix Rain</option><option value="stars">Starfield</option><option value="snow">Snowfall</option><option value="particles">Cyber Particles</option><option value="grid">Cyber Grid</option><option value="none">Off</option></select></label>
+            <label>Warna utama<input type="color" name="accent" value="#79f2a0"></label><label>Warna kedua<input type="color" name="accent2" value="#58d9ff"></label>
+            <label>Kecepatan efek <output id="speedOutput">5</output><input type="range" min="1" max="10" name="speed" value="5"></label>
+            <label>Jumlah partikel <output id="densityOutput">55</output><input type="range" min="10" max="150" name="density" value="55"></label>
+            <label>Intensitas glow<select name="glow"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></label>
+            <label class="toggle-line"><input type="checkbox" name="motion" checked> Aktifkan animasi</label>
+            <label class="toggle-line"><input type="checkbox" name="scanline" checked> Scanline</label>
+            <label class="toggle-line"><input type="checkbox" name="grid" checked> Grid overlay</label>
+            <label class="wide">Teks logo / monogram<input name="logoText" maxlength="12" placeholder="K//"></label>
+            <div class="wide action-row"><button class="btn primary">Simpan & Terapkan Desain</button><button type="button" id="previewEffect" class="btn ghost">Preview efek</button><span id="designStatus" class="form-status"></span></div>
+          </form><div id="effectPreview" class="effect-preview"><span>LIVE EFFECT PREVIEW</span></div>
+        </div>
+      </div>
+      <div id="analyticsPane" class="admin-pane hidden">
+        <div class="admin-card"><div class="list-head"><div><span class="kicker">BUSINESS INTELLIGENCE</span><h2>Analytics & Reports</h2></div><button id="refreshAnalytics" class="btn ghost">Refresh data</button></div><div class="analytics-grid"><div><small>Total pesanan</small><b id="anaTotal">0</b></div><div><small>Pesanan aktif</small><b id="anaActive">0</b></div><div><small>Pesanan selesai</small><b id="anaDone">0</b></div><div><small>Konversi selesai</small><b id="anaRate">0%</b></div></div><h3>Distribusi status</h3><div id="statusBars" class="status-bars"></div><h3>Platform / layanan populer</h3><div id="popularServices" class="admin-list"></div><p class="muted-note">Analytics dihitung dari dokumen pesanan yang dapat dibaca admin. Pengunjung website tidak dihitung sebagai unique visitors karena belum ada sistem analytics/consent khusus.</p></div>
+      </div>
+      <div id="systemPane" class="admin-pane hidden">
+        <div class="admin-card"><span class="kicker">MAINTENANCE & DIAGNOSTICS</span><h2>System Tools</h2><div class="system-grid">
+          <div class="tool-card"><h3>Website monitor</h3><p>Uji waktu respons halaman publik dari perangkat ini.</p><button id="runMonitor" class="btn primary">Jalankan pemeriksaan</button><b id="monitorResult">Belum diperiksa</b></div>
+          <div class="tool-card"><h3>Firebase connection</h3><p>Uji pembacaan dokumen konfigurasi publik.</p><button id="runFirebaseCheck" class="btn ghost">Test Firestore</button><b id="firebaseResult">Belum diperiksa</b></div>
+          <div class="tool-card"><h3>Backup konfigurasi</h3><p>Unduh salinan konfigurasi, layanan, dan paket sebagai JSON.</p><button id="backupData" class="btn ghost">Download backup</button></div>
+          <div class="tool-card"><h3>Restore konfigurasi</h3><p>Restore backup JSON ke siteConfig/main. Lakukan dengan hati-hati.</p><input id="restoreFile" type="file" accept="application/json"><button id="restoreData" class="btn danger">Restore JSON</button></div>
+          <div class="tool-card"><h3>Export katalog</h3><p>Unduh daftar layanan dan paket.</p><button id="exportCatalog" class="btn ghost">Export katalog CSV</button></div>
+          <div class="tool-card"><h3>Maintenance mode</h3><p>Pengaturan tersedia pada tab Website. Admin tetap dapat login.</p><button class="btn ghost" data-jump="sitePane">Buka pengaturan</button></div>
+        </div></div>
+        <div class="admin-card"><h2>Activity log (sesi ini)</h2><div id="activityLog" class="activity-log"><p>Belum ada aktivitas.</p></div><button id="clearActivity" class="btn ghost">Bersihkan log lokal</button></div>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
