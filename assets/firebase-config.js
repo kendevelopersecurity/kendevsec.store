@@ -1,9 +1,11 @@
-// Isi dari Firebase Console > Project settings > Your apps > Web app.
+
+// Firebase configuration - KENDEVSEC
 export const firebaseConfig = {
-  apiKey: "GANTI_DENGAN_API_KEY",
-  authDomain: "GANTI_DENGAN_PROJECT_ID.firebaseapp.com",
-  projectId: "GANTI_DENGAN_PROJECT_ID",
-  storageBucket: "GANTI_DENGAN_PROJECT_ID.appspot.com",
-  messagingSenderId: "GANTI_DENGAN_SENDER_ID",
-  appId: "GANTI_DENGAN_APP_ID"
+  apiKey: "AIzaSyBgtKTUibkVE6I t_heywDQlgw73G1PGOfc",
+  authDomain: "kendevsecstore.firebaseapp.com",
+  projectId: "kendevsecstore",
+  storageBucket: "kendevsecstore.firebasestorage.app",
+  messagingSenderId: "416373613500",
+  appId: "1:416373613500:web:e67f55c8582dd12aa5c1b9",
+  measurementId: "G-Z1LD1H3ZW0"
 };
