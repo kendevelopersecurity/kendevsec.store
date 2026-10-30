@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true;
+    }
+    match /admins/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list, create, update, delete: if false;
+    }
+    match /site/{id} { allow read: if id == 'settings'; allow write: if isAdmin(); }
+    match /services/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /categories/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /articles/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /faqs/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /testimonials/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /coupons/{id} { allow read, write: if isAdmin(); }
+    match /sections/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /messages/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name','email','phone','message','createdAt','status'])
+        && request.resource.data.name is string && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 100
+        && request.resource.data.email is string && request.resource.data.email.size() <= 254
+        && request.resource.data.phone is string && request.resource.data.phone.size() <= 24
+        && request.resource.data.message is string && request.resource.data.message.size() <= 2000;
+      allow read, update, delete: if isAdmin();
+    }
+    match /orders/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['customer','service','phone','message','coupon','discount','status','createdAt'])
+        && request.resource.data.keys().hasAll(['customer','service','phone','message','coupon','discount','status','createdAt'])
+        && request.resource.data.status == 'new'
+        && request.resource.data.customer is string && request.resource.data.customer.size() >= 1 && request.resource.data.customer.size() <= 100
+        && request.resource.data.phone is string && request.resource.data.phone.size() >= 8 && request.resource.data.phone.size() <= 24
+        && request.resource.data.service is string && request.resource.data.service.size() >= 1 && request.resource.data.service.size() <= 120
+        && request.resource.data.message is string && request.resource.data.message.size() <= 1500
+        && request.resource.data.coupon is string && request.resource.data.coupon.size() <= 40
+        && request.resource.data.discount == 0;
+      allow read, update, delete: if isAdmin();
+    }
+    match /auditLogs/{id} { allow read, create: if isAdmin(); allow update, delete: if false; }
+  }
+}
