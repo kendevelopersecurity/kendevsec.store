@@ -1,4 +1,4 @@
-
+// Firebase configuration - KENDEVSEC
 export const firebaseConfig = {
   apiKey: "AIzaSyBgtKTUibkVE6I6t_heywDQlgw73G1PGOfc",
   authDomain: "kendevsecstore.firebaseapp.com",
